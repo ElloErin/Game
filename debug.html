@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tamagotchi Game Test</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<main id="game-wrapper">
+
+  <section id="start-screen">
+    <h1>Erin is Sleeping</h1>
+
+    <img id="sleeping-erin-image" src="assets/pet-sleeping.png" alt="sleeping">
+
+    <p>Erin is still asleep. Wake her up to begin.</p>
+
+    <button id="wake-button">Wake Erin Up</button>
+  </section>
+
+  <section id="pet-card" style="display: none;">
+    <h1>My Tiny Pet</h1>
+	<button id="brb-button" class="brb-button">BRB</button>
+	<button id="return-button" class="return-button">I'm back</button>
+
+    <div id="pet-display">
+      <img id="pet-image" src="assets/pet-happy.png" alt="Pet">
+
+      <p id="pet-mood">Mood: Waiting...</p>
+      <p id="pet-age">Age: 0 seconds</p>
+    </div>
+<div id="status-bars">
+  <div class="status-row">
+    <div class="status-item">
+      <span class="status-icon">🍗</span>
+      <span id="hunger-bar" class="status-bar"></span>
+    </div>
+
+    <div class="status-item">
+      <span class="status-icon">😊</span>
+      <span id="happiness-bar" class="status-bar"></span>
+    </div>
+  </div>
+
+  <div class="status-row">
+    <div class="status-item">
+      <span class="status-icon">⚡</span>
+      <span id="energy-bar" class="status-bar"></span>
+    </div>
+
+    <div class="status-item">
+      <span class="status-icon">🛁</span>
+      <span id="cleanliness-bar" class="status-bar"></span>
+    </div>
+  </div>
+</div>
+    <div id="stats">
+      <div class="stat-row">
+        <span>Hunger</span>
+        <span id="hunger-value">100</span>
+      </div>
+
+      <div class="stat-row">
+        <span>Happiness</span>
+        <span id="happiness-value">100</span>
+      </div>
+
+      <div class="stat-row">
+        <span>Energy</span>
+        <span id="energy-value">100</span>
+      </div>
+
+      <div class="stat-row">
+        <span>Cleanliness</span>
+        <span id="cleanliness-value">100</span>
+      </div>
+    </div>
+
+<div id="actions">
+  <button id="feed-button">Feed</button>
+  <button id="play-button">Play</button>
+  <button id="nap-button">Nap</button>
+    <button id="clean-button">Clean</button>
+  <button id="bedtime-button">Bedtime</button>
+  <button id="brb-button">BRB</button>
+</div>
+<div id="debug-panel">
+  <button id="debug-max">Max Stats</button>
+  <button id="debug-min">Min Stats</button>
+  <button id="debug-reset">Reset Pet</button>
+  <button id="debug-wake">Force Wake</button>
+</div>
+  </section>
+
+</main>
+<div id="bedtime-modal">
+  <div id="bedtime-modal-box">
+    <h2>Bedtime?</h2>
+    <p id="bedtime-modal-text">Bedtime will last 2 minutes.</p>
+
+    <div class="modal-actions">
+      <button id="confirm-bedtime-button">Start Bedtime</button>
+      <button id="cancel-bedtime-button">Cancel</button>
+    </div>
+  </div>
+</div>
+<script>
+  const DEBUG_MODE = true;
+</script>
+<script src="game.js"></script>
+</body>
+</html>

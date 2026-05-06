@@ -1,0 +1,286 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Main wrapper */
+#game-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Start screen */
+#start-screen {
+  text-align: center;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+}
+
+/* Main game card */
+#pet-card {
+  position: relative;
+  text-align: center;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+}
+
+/* BRB button inside card */
+.brb-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #888;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.brb-button:hover {
+  background-color: #777;
+}
+
+/* Images */
+#sleeping-erin-image {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+#pet-image {
+  width: 150px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+/* Status indicators */
+#status-bars {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 6px 0;
+}
+
+.status-item {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 24px 70px 22px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 18px;
+}
+
+.status-icon {
+  width: 24px;
+  text-align: center;
+}
+
+.status-bar {
+  letter-spacing: 2px;
+  font-size: 18px;
+}
+
+.half {
+  font-size: 0.68em;
+  position: relative;
+  top: -1px;
+}
+
+.stat-low {
+  color: #d9534f;
+  font-weight: bold;
+}
+
+/* Debug stats */
+#stats {
+  margin-top: 15px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+/* Buttons */
+#actions {
+  margin-top: 15px;
+}
+
+button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button.cooldown {
+  background-color: #999999;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+/* Main action buttons */
+#main-actions {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+#main-actions button {
+  flex: 1;
+  margin: 0;
+  padding: 8px 6px;
+  font-size: 13px;
+}
+
+/* Bedtime and BRB area */
+#bedtime-action {
+  margin-top: 12px;
+}
+
+#bedtime-button {
+  width: 100%;
+  margin: 0;
+  background-color: #5d6d9e;
+}
+
+#bedtime-button:hover {
+  background-color: #4f5f8c;
+}
+
+#bedtime-button.cooldown {
+  background-color: #999999;
+  opacity: 0.6;
+}
+
+/* Bedtime modal */
+#bedtime-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#bedtime-modal.active {
+  display: flex;
+}
+
+#bedtime-modal-box {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 280px;
+  text-align: center;
+}
+
+.modal-actions {
+  margin-top: 15px;
+}
+
+/* Bedtime mode */
+.return-button {
+  display: none;
+  background-color: #5d6d9e;
+}
+
+body.bedtime-mode .return-button {
+  display: inline-block;
+  margin-top: 12px;
+}
+body.bedtime-mode .brb-button {
+  display: none;
+}
+body.bedtime-mode {
+  background-color: #1f2433;
+}
+
+body.bedtime-mode #pet-card {
+  background: #2f3548;
+  color: #ffffff;
+}
+
+body.bedtime-mode #pet-image {
+  width: 200px;
+}
+
+body.bedtime-mode #status-bars,
+body.bedtime-mode #stats,
+body.bedtime-mode #actions,
+body.bedtime-mode #pet-age {
+  display: none !important;
+}
+
+body.bedtime-mode #pet-mood {
+  font-size: 18px;
+  margin-top: 12px;
+}
+
+/* Debug panel during bedtime */
+body.bedtime-mode #debug-panel {
+  display: block !important;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: #ffffff;
+  color: #000000;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* Stat change indicators */
+.stat-indicator {
+  display: inline-block;
+  width: 22px;
+  margin-left: 4px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  animation: fadeUp 1s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
