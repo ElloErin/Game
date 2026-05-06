@@ -1,10 +1,10 @@
 const DEBUG = typeof DEBUG_MODE !== "undefined" ? DEBUG_MODE : false;
 let pet = {
   petName: "Erin",
-  hunger: 100,
-  happiness: 100,
-  energy: 100,
-  cleanliness: 100,
+  hunger: 50,
+  happiness: 50,
+  energy: 50,
+  cleanliness: 50,
   hasStarted: false,
   birthTime: null,
   lastUpdated: null,
@@ -847,7 +847,12 @@ function wakeUp() {
   pet.hasStarted = true;
   pet.birthTime = Date.now();
   pet.lastUpdated = Date.now();
-
+	
+pet.hunger = 50;
+pet.happiness = 50;
+pet.energy = 50;
+pet.cleanliness = 50;
+	
   savePet();
   updateScreen();
   updateDisplay();
