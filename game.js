@@ -305,10 +305,7 @@ document.getElementById("hunger-bar").innerHTML = getQuarterBar(pet.hunger);
 document.getElementById("happiness-bar").innerHTML = getQuarterBar(pet.happiness);
 document.getElementById("energy-bar").innerHTML = getQuarterBar(pet.energy);
 document.getElementById("cleanliness-bar").innerHTML = getQuarterBar(pet.cleanliness);
-document.getElementById("hunger-bar").innerHTML = getQuarterBar(pet.hunger);
-document.getElementById("happiness-bar").innerHTML = getQuarterBar(pet.happiness);
-document.getElementById("energy-bar").innerHTML = getQuarterBar(pet.energy);
-document.getElementById("cleanliness-bar").innerHTML = getQuarterBar(pet.cleanliness);
+
 
   if (DEBUG) {
     const normalAge = getPetAgeText();
@@ -649,10 +646,15 @@ if (secondsPassed < 1) {
 const hoursPassed = secondsPassed / 3600;
 const decayMultiplier = pet.isAway ? 0.25 : 1;
 
-pet.hunger = Math.max(0, pet.hunger - hoursPassed * 15 * decayMultiplier);
-pet.happiness = Math.max(0, pet.happiness - hoursPassed * 25 * decayMultiplier);
-pet.energy = Math.max(0, pet.energy - hoursPassed * 10 * decayMultiplier);
-pet.cleanliness = Math.max(0, pet.cleanliness - hoursPassed * 10 * decayMultiplier);
+pet.hunger -= hoursPassed * 15 * decayMultiplier;
+pet.happiness -= hoursPassed * 25 * decayMultiplier;
+pet.energy -= hoursPassed * 10 * decayMultiplier;
+pet.cleanliness -= hoursPassed * 10 * decayMultiplier;
+
+pet.hunger = Math.max(0, Number(pet.hunger.toFixed(6)));
+pet.happiness = Math.max(0, Number(pet.happiness.toFixed(6)));
+pet.energy = Math.max(0, Number(pet.energy.toFixed(6)));
+pet.cleanliness = Math.max(0, Number(pet.cleanliness.toFixed(6)));
 
   pet.lastUpdated = now;
 
