@@ -1,6 +1,6 @@
 const DEBUG = typeof DEBUG_MODE !== "undefined" ? DEBUG_MODE : false;
 let pet = {
-  petName: "Erin",
+  petName: "Rin",
   hunger: 50,
   happiness: 50,
   energy: 50,
@@ -559,7 +559,7 @@ function checkAwayTime() {
 }
 
 function getPetName() {
-  return pet.petName || "Erin";
+  return pet.petName || "Rin";
 }
 
 function brbPet() {
