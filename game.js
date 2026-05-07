@@ -34,8 +34,8 @@ const FEED_COOLDOWN = 10000;
 const PLAY_COOLDOWN = 15000;
 const NAP_COOLDOWN = 60000;
 const CLEAN_COOLDOWN = 30000;
-const AWAY_LIMIT = DEBUG ? 60 * 1000 : 6 * 60 * 60 * 1000;
-const BRB_LIMIT = DEBUG ? 2 * 60 * 1000 : 12 * 60 * 60 * 1000;
+const AWAY_LIMIT = 6 * 60 * 60 * 1000;
+const BRB_LIMIT = 12 * 60 * 60 * 1000;
 
 function safeAddClick(id, handler) {
   const element = document.getElementById(id);
@@ -172,6 +172,12 @@ function getCooldownText(actionName) {
   }
 
   return formatDuration(millisecondsLeft);
+}
+
+function updateLastVisit() {
+  pet.lastVisitTime = Date.now();
+  pet.awayMessageShown = false;
+  savePet();
 }
 
 function getPetAgeText() {
@@ -596,7 +602,7 @@ function returnFromAway() {
   pet.lastVisitTime = now;
   pet.lastUpdated = now;
 
-  if (awayTime >= 30 * 1000 && awayTime <= 60 * 1000) {
+  if (awayTime >= 1 * 60 * 60 * 1000 && awayTime <= 6 * 60 * 60 * 1000) {
     pet.happiness = Math.min(100, pet.happiness + 15);
 
     savePet();
@@ -939,12 +945,19 @@ function showAction(text) {
   actionBox.style.padding = "10px 15px";
   actionBox.style.borderRadius = "10px";
   actionBox.style.fontSize = "14px";
+  actionBox.style.zIndex = "9999";
 
   document.body.appendChild(actionBox);
 
+  let duration = 2000;
+
+  if (text.length > 25) {
+    duration = 3500;
+  }
+
   setTimeout(function() {
     actionBox.remove();
-  }, 1000);
+  }, duration);
 }
 
 function updateDebugUI() {
@@ -1019,3 +1032,26 @@ setInterval(function() {
     updateDisplay();
   }
 }, 1000);
+window.addEventListener("beforeunload", updateLastVisit);
+window.addEventListener("pagehide", updateLastVisit);
+
+window.addEventListener("pageshow", function () {
+  checkAwayTime();
+  updateDisplay();
+});
+
+window.addEventListener("focus", function () {
+  checkAwayTime();
+  updateDisplay();
+});
+
+document.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "hidden") {
+    updateLastVisit();
+  }
+
+  if (document.visibilityState === "visible") {
+    checkAwayTime();
+    updateDisplay();
+  }
+});
