@@ -1,6 +1,6 @@
 const DEBUG = typeof DEBUG_MODE !== "undefined" ? DEBUG_MODE : false;
 let pet = {
-  petName: "Rin",
+  petName: "Erin",
   hunger: 50,
   happiness: 50,
   energy: 50,
@@ -559,7 +559,7 @@ function checkAwayTime() {
 }
 
 function getPetName() {
-  return pet.petName || "Rin";
+  return pet.petName || "Erin";
 }
 
 function brbPet() {
@@ -646,10 +646,10 @@ if (secondsPassed < 1) {
 const hoursPassed = secondsPassed / 3600;
 const decayMultiplier = pet.isAway ? 0.25 : 1;
 
-pet.hunger -= hoursPassed * 15 * decayMultiplier;
+pet.hunger -= hoursPassed * 25 * decayMultiplier;
 pet.happiness -= hoursPassed * 25 * decayMultiplier;
-pet.energy -= hoursPassed * 10 * decayMultiplier;
-pet.cleanliness -= hoursPassed * 10 * decayMultiplier;
+pet.energy -= hoursPassed * 25 * decayMultiplier;
+pet.cleanliness -= hoursPassed * 25 * decayMultiplier;
 
 pet.hunger = Math.max(0, Number(pet.hunger.toFixed(6)));
 pet.happiness = Math.max(0, Number(pet.happiness.toFixed(6)));
