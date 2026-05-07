@@ -30,12 +30,12 @@ let pet = {
 
 const NAP_DURATION = 30000;
 const BEDTIME_DURATION = DEBUG ? 120000 : 8 * 60 * 60 * 1000;
-const FEED_COOLDOWN = 30000;
-const PLAY_COOLDOWN = 30000;
+const FEED_COOLDOWN = 10000;
+const PLAY_COOLDOWN = 15000;
 const NAP_COOLDOWN = 60000;
 const CLEAN_COOLDOWN = 30000;
-const AWAY_LIMIT = 6 * 60 * 60 * 1000;
-const BRB_LIMIT = 12 * 60 * 60 * 1000;
+const AWAY_LIMIT = DEBUG ? 60 * 1000 : 6 * 60 * 60 * 1000;
+const BRB_LIMIT = DEBUG ? 2 * 60 * 1000 : 12 * 60 * 60 * 1000;
 
 function safeAddClick(id, handler) {
   const element = document.getElementById(id);
@@ -596,7 +596,7 @@ function returnFromAway() {
   pet.lastVisitTime = now;
   pet.lastUpdated = now;
 
-  if (awayTime >= 1 * 60 * 60 * 1000 && awayTime <= 6 * 60 * 60 * 1000) {
+  if (awayTime >= 30 * 1000 && awayTime <= 60 * 1000) {
     pet.happiness = Math.min(100, pet.happiness + 15);
 
     savePet();
