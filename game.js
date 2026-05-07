@@ -1,10 +1,10 @@
 const DEBUG = typeof DEBUG_MODE !== "undefined" ? DEBUG_MODE : false;
 let pet = {
   petName: "Erin",
-  hunger: 100,
-  happiness: 100,
-  energy: 100,
-  cleanliness: 100,
+  hunger: 50,
+  happiness: 50,
+  energy: 50,
+  cleanliness: 50,
   hasStarted: false,
   birthTime: null,
   lastUpdated: null,
@@ -290,10 +290,17 @@ function updateBedtimeMode() {
 }
 
 function updateDisplay() {
-  document.getElementById("hunger-value").textContent = DEBUG ? pet.hunger : "";
-  document.getElementById("happiness-value").textContent = DEBUG ? pet.happiness : "";
-  document.getElementById("energy-value").textContent = DEBUG ? pet.energy : "";
-  document.getElementById("cleanliness-value").textContent = DEBUG ? pet.cleanliness : "";
+document.getElementById("hunger-value").textContent =
+  DEBUG ? pet.hunger.toFixed(2) : "";
+
+document.getElementById("happiness-value").textContent =
+  DEBUG ? pet.happiness.toFixed(2) : "";
+
+document.getElementById("energy-value").textContent =
+  DEBUG ? pet.energy.toFixed(2) : "";
+
+document.getElementById("cleanliness-value").textContent =
+  DEBUG ? pet.cleanliness.toFixed(2) : "";
 document.getElementById("hunger-bar").innerHTML = getQuarterBar(pet.hunger);
 document.getElementById("happiness-bar").innerHTML = getQuarterBar(pet.happiness);
 document.getElementById("energy-bar").innerHTML = getQuarterBar(pet.energy);
@@ -647,11 +654,6 @@ pet.happiness = Math.max(0, pet.happiness - hoursPassed * 25 * decayMultiplier);
 pet.energy = Math.max(0, pet.energy - hoursPassed * 10 * decayMultiplier);
 pet.cleanliness = Math.max(0, pet.cleanliness - hoursPassed * 10 * decayMultiplier);
 
-  pet.hunger = Math.round(pet.hunger * 100) / 100;
-  pet.happiness = Math.round(pet.happiness * 100) / 100;
-  pet.energy = Math.round(pet.energy * 100) / 100;
-  pet.cleanliness = Math.round(pet.cleanliness * 100) / 100;
-
   pet.lastUpdated = now;
 
   savePet();
@@ -847,6 +849,11 @@ function wakeUp() {
   pet.hasStarted = true;
   pet.birthTime = Date.now();
   pet.lastUpdated = Date.now();
+  
+  pet.hunger = 50;
+  pet.happiness = 50;
+  pet.energy = 50;
+  pet.cleanliness = 50;
 
   savePet();
   updateScreen();
@@ -950,14 +957,6 @@ function updateDebugUI() {
   }
 }
 
-document.getElementById("feed-button").addEventListener("click", feedPet);
-document.getElementById("play-button").addEventListener("click", playWithPet);
-document.getElementById("nap-button").addEventListener("click", napPet);
-document.getElementById("bedtime-button").addEventListener("click", putPetToBed);
-document.getElementById("clean-button").addEventListener("click", cleanPet);
-document.getElementById("wake-button").addEventListener("click", wakeUp);
-document.getElementById("confirm-bedtime-button").addEventListener("click", confirmBedtime);
-document.getElementById("cancel-bedtime-button").addEventListener("click", cancelBedtime);
 safeAddClick("feed-button", feedPet);
 safeAddClick("play-button", playWithPet);
 safeAddClick("nap-button", napPet);
