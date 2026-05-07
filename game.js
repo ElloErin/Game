@@ -1,6 +1,6 @@
 const DEBUG = typeof DEBUG_MODE !== "undefined" ? DEBUG_MODE : false;
 let pet = {
-  petName: "Rin",
+  petName: "Erin",
   hunger: 50,
   happiness: 50,
   energy: 50,
@@ -290,22 +290,18 @@ function updateBedtimeMode() {
 }
 
 function updateDisplay() {
-document.getElementById("hunger-value").textContent =
-  DEBUG ? pet.hunger.toFixed(2) : "";
-
-document.getElementById("happiness-value").textContent =
-  DEBUG ? pet.happiness.toFixed(2) : "";
-
-document.getElementById("energy-value").textContent =
-  DEBUG ? pet.energy.toFixed(2) : "";
-
-document.getElementById("cleanliness-value").textContent =
-  DEBUG ? pet.cleanliness.toFixed(2) : "";
+  document.getElementById("hunger-value").textContent = DEBUG ? pet.hunger : "";
+  document.getElementById("happiness-value").textContent = DEBUG ? pet.happiness : "";
+  document.getElementById("energy-value").textContent = DEBUG ? pet.energy : "";
+  document.getElementById("cleanliness-value").textContent = DEBUG ? pet.cleanliness : "";
 document.getElementById("hunger-bar").innerHTML = getQuarterBar(pet.hunger);
 document.getElementById("happiness-bar").innerHTML = getQuarterBar(pet.happiness);
 document.getElementById("energy-bar").innerHTML = getQuarterBar(pet.energy);
 document.getElementById("cleanliness-bar").innerHTML = getQuarterBar(pet.cleanliness);
-
+document.getElementById("hunger-bar").innerHTML = getQuarterBar(pet.hunger);
+document.getElementById("happiness-bar").innerHTML = getQuarterBar(pet.happiness);
+document.getElementById("energy-bar").innerHTML = getQuarterBar(pet.energy);
+document.getElementById("cleanliness-bar").innerHTML = getQuarterBar(pet.cleanliness);
 
   if (DEBUG) {
     const normalAge = getPetAgeText();
@@ -559,7 +555,7 @@ function checkAwayTime() {
 }
 
 function getPetName() {
-  return pet.petName || "Rin";
+  return pet.petName || "Erin";
 }
 
 function brbPet() {
@@ -646,15 +642,15 @@ if (secondsPassed < 1) {
 const hoursPassed = secondsPassed / 3600;
 const decayMultiplier = pet.isAway ? 0.25 : 1;
 
-pet.hunger -= hoursPassed * 15 * decayMultiplier;
-pet.happiness -= hoursPassed * 25 * decayMultiplier;
-pet.energy -= hoursPassed * 10 * decayMultiplier;
-pet.cleanliness -= hoursPassed * 10 * decayMultiplier;
+pet.hunger = Math.max(0, pet.hunger - hoursPassed * 15 * decayMultiplier);
+pet.happiness = Math.max(0, pet.happiness - hoursPassed * 25 * decayMultiplier);
+pet.energy = Math.max(0, pet.energy - hoursPassed * 10 * decayMultiplier);
+pet.cleanliness = Math.max(0, pet.cleanliness - hoursPassed * 10 * decayMultiplier);
 
-pet.hunger = Math.max(0, Number(pet.hunger.toFixed(6)));
-pet.happiness = Math.max(0, Number(pet.happiness.toFixed(6)));
-pet.energy = Math.max(0, Number(pet.energy.toFixed(6)));
-pet.cleanliness = Math.max(0, Number(pet.cleanliness.toFixed(6)));
+  pet.hunger = Math.round(pet.hunger * 100) / 100;
+  pet.happiness = Math.round(pet.happiness * 100) / 100;
+  pet.energy = Math.round(pet.energy * 100) / 100;
+  pet.cleanliness = Math.round(pet.cleanliness * 100) / 100;
 
   pet.lastUpdated = now;
 
@@ -851,12 +847,12 @@ function wakeUp() {
   pet.hasStarted = true;
   pet.birthTime = Date.now();
   pet.lastUpdated = Date.now();
-  
-  pet.hunger = 50;
-  pet.happiness = 50;
-  pet.energy = 50;
-  pet.cleanliness = 50;
-
+	
+pet.hunger = 50;
+pet.happiness = 50;
+pet.energy = 50;
+pet.cleanliness = 50;
+	
   savePet();
   updateScreen();
   updateDisplay();
@@ -959,6 +955,14 @@ function updateDebugUI() {
   }
 }
 
+document.getElementById("feed-button").addEventListener("click", feedPet);
+document.getElementById("play-button").addEventListener("click", playWithPet);
+document.getElementById("nap-button").addEventListener("click", napPet);
+document.getElementById("bedtime-button").addEventListener("click", putPetToBed);
+document.getElementById("clean-button").addEventListener("click", cleanPet);
+document.getElementById("wake-button").addEventListener("click", wakeUp);
+document.getElementById("confirm-bedtime-button").addEventListener("click", confirmBedtime);
+document.getElementById("cancel-bedtime-button").addEventListener("click", cancelBedtime);
 safeAddClick("feed-button", feedPet);
 safeAddClick("play-button", playWithPet);
 safeAddClick("nap-button", napPet);
