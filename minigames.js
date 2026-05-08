@@ -161,7 +161,7 @@ function finishMiniGame(hitBomb) {
   const gameArea = document.getElementById("mini-game-area");
   gameArea.innerHTML = "";
 
-  const happinessGain = hitBomb ? 0 : Math.floor(miniGameScore / 5);
+  const happinessGain = hitBomb ? 0 : miniGameScore;
 
   if (!hitBomb) {
     const beforeStats = getStatSnapshot();
