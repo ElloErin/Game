@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <title>Tamagotchi Game Test</title>
 
@@ -96,6 +96,7 @@
   </div>
 </div>
 
+</section>
 </main>
 <div id="bedtime-modal">
   <div id="bedtime-modal-box">
@@ -108,9 +109,38 @@
     </div>
   </div>
 </div>
-  <script src="game.js"></script<script>
+<div id="play-modal">
+  <div id="play-modal-box">
+    <h2>Play Time</h2>
+    <p>How do you want to play?</p>
+
+    <div class="modal-actions">
+      <button id="quick-play-button">Quick Play</button>
+      <button id="mini-game-button">Mini Game</button>
+      <button id="cancel-play-button">Cancel</button>
+    </div>
+  </div>
+</div>
+<div id="mini-game-overlay">
+  <div id="mini-game-box">
+    <h2>Mini Game</h2>
+    <p id="mini-game-message">Get ready!</p>
+
+    <div id="mini-game-area">
+      <p>Game area goes here.</p>
+    </div>
+
+    <div class="modal-actions">
+      <button id="start-mini-game-button">Start</button>
+      <button id="exit-mini-game-button">Exit</button>
+    </div>
+  </div>
+</div>
+<script>
   const DEBUG_MODE = false;
 </script>
+
 <script src="game.js"></script>
+<script src="minigames.js"></script>
 </body>
 </html>

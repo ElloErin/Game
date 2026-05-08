@@ -175,9 +175,22 @@ function getCooldownText(actionName) {
 }
 
 function updateLastVisit() {
-  pet.lastVisitTime = Date.now();
-  pet.awayMessageShown = false;
-  savePet();
+  const savedPet = localStorage.getItem("myPet");
+
+  if (!savedPet) {
+    return;
+  }
+
+  const savedData = JSON.parse(savedPet);
+
+  if (!savedData.hasStarted) {
+    return;
+  }
+
+  savedData.lastVisitTime = Date.now();
+  savedData.awayMessageShown = false;
+
+  localStorage.setItem("myPet", JSON.stringify(savedData));
 }
 
 function getPetAgeText() {
@@ -705,6 +718,25 @@ function playWithPet() {
     return;
   }
 
+  if (pet.isAway) {
+    showAction("You are away right now!");
+    return;
+  }
+
+  if (pet.energy < 5) {
+    showAction("I'm too tired");
+    return;
+  }
+
+  document.getElementById("play-modal").classList.add("active");
+}
+
+function quickPlayWithPet() {
+  if (pet.isSleeping) {
+    showAction(getPetName() + " is sleeping!");
+    return;
+  }
+
   if (pet.energy < 5) {
     showAction("I'm too tired");
     return;
@@ -720,6 +752,20 @@ const beforeStats = getStatSnapshot();
   updateDisplay();
   showStatChangesFromSnapshot(beforeStats);
   showAction("Played!");
+}
+
+function closePlayMenu() {
+  document.getElementById("play-modal").classList.remove("active");
+}
+
+function startQuickPlay() {
+  closePlayMenu();
+  quickPlayWithPet();
+}
+
+function startMiniGameOption() {
+  closePlayMenu();
+  openMiniGame();
 }
 
 function napPet() {
@@ -855,9 +901,14 @@ function updateScreen() {
 
 function wakeUp() {
   pet.hasStarted = true;
-  pet.birthTime = Date.now();
+
+  if (!pet.birthTime) {
+    pet.birthTime = Date.now();
+  }
+
   pet.lastUpdated = Date.now();
-  
+  pet.lastVisitTime = Date.now();
+
   pet.hunger = 50;
   pet.happiness = 50;
   pet.energy = 50;
@@ -982,6 +1033,9 @@ safeAddClick("confirm-bedtime-button", confirmBedtime);
 safeAddClick("cancel-bedtime-button", cancelBedtime);
 safeAddClick("brb-button", brbPet);
 safeAddClick("return-button", returnFromAway);
+safeAddClick("quick-play-button", startQuickPlay);
+safeAddClick("mini-game-button", startMiniGameOption);
+safeAddClick("cancel-play-button", closePlayMenu);
 
 if (DEBUG) {
   safeAddClick("debug-max", function () {

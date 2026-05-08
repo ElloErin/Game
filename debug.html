@@ -87,7 +87,6 @@
   <button id="nap-button">Nap</button>
     <button id="clean-button">Clean</button>
   <button id="bedtime-button">Bedtime</button>
-  <button id="brb-button">BRB</button>
 </div>
 <div id="debug-panel">
   <button id="debug-max">Max Stats</button>
@@ -109,9 +108,38 @@
     </div>
   </div>
 </div>
+<div id="play-modal">
+  <div id="play-modal-box">
+    <h2>Play Time</h2>
+    <p>How do you want to play?</p>
+
+    <div class="modal-actions">
+      <button id="quick-play-button">Quick Play</button>
+      <button id="mini-game-button">Mini Game</button>
+      <button id="cancel-play-button">Cancel</button>
+    </div>
+  </div>
+</div>
+<div id="mini-game-overlay">
+  <div id="mini-game-box">
+    <h2>Mini Game</h2>
+    <p id="mini-game-message">Get ready!</p>
+
+    <div id="mini-game-area">
+      <p>Game area goes here.</p>
+    </div>
+
+    <div class="modal-actions">
+      <button id="start-mini-game-button">Start</button>
+      <button id="exit-mini-game-button">Exit</button>
+    </div>
+  </div>
+</div>
 <script>
   const DEBUG_MODE = true;
 </script>
+
 <script src="game.js"></script>
+<script src="minigames.js"></script>
 </body>
 </html>
